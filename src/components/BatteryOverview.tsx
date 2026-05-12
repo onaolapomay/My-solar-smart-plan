@@ -1,6 +1,6 @@
 type BatteryOverviewProps = {
     percentage: number;
-    status: 'Charging' | 'Discharging' | 'Full';
+    status: string;
     runtime: string;
 }
 
