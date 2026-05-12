@@ -1,17 +1,34 @@
-import appliance from '../data/appliance'
+import { useEffect, useState } from 'react'
+import type { Appliance } from '../types/appliance'
 
 
 const Analytics = () => {
-const totalUsage = appliance.filter
-((appliance) => appliance.isActive).reduce((total, appliance) => total + appliance.wattage, 0
+
+    const [ deviceList, setDeviceList ] = useState<Appliance[]>([])
+
+    useEffect(() => {
+        const savedDevices = localStorage.getItem('devices')
+        if (savedDevices) {
+            setDeviceList(JSON.parse(savedDevices))
+        }
+    }, [])
+
+const totalUsage = deviceList.filter
+((device) => device.isActive).reduce((total, device) => total + device.wattage, 0
 )
 
-const activeDevices = appliance.filter
-((appliance) => appliance.isActive).length;
+const activeDevices = deviceList.filter
+((device) => device.isActive).length;
 
-const highestDevices = appliance.reduce
-((highest, appliance) => appliance.wattage >
- highest.wattage ? appliance : highest)
+const highestDevices =deviceList.length > 0
+ deviceList.reduce
+((highest, device) => device.wattage >
+ highest.wattage ? device : highest, deviceList[0]
+)
+
+ const usageStatus = totalUsage > 
+ 300 ? 'High Usage' : totalUsage >
+ 200 ? 'Moderate Usage' : 'Low Usage'
 
 
     return (
@@ -31,6 +48,11 @@ const highestDevices = appliance.reduce
                 <div className='bg-slate-900 text-white p-6 rounded-2xl'>
                     <h2 className='text-xl font-semibold mb-2'>Highest Device</h2>
                     <p className='text-2xl font-bold'>{highestDevices.name} - {highestDevices.wattage}W</p>
+                </div>
+
+                <div className='bg-slate-900 text-white p-6 rounded-2xl'>
+                    <h2 className='text-xl font-semibold mb-2'>Usage Status</h2>
+                    <p className='text-2xl font-bold'>{usageStatus}</p>
                 </div>
             </div>
         </div>
