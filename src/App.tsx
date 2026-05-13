@@ -11,7 +11,7 @@ function App() {
     <div className={`flex min-h-screen transition-all duration-300 ${DarkMode ? 'bg-black text-white' : 'bg-white text-black'}`}>
       
       <Sidebar/>
-      <button onClick={() => setDarkMode(!DarkMode)} className='absolute bottom-6 left-6 p-3 rounded-full bg-slate-800 text-white '>
+      <button onClick={() => setDarkMode(!DarkMode)} className='fixed bottom-6 right-6 p-3 rounded-full bg-slate-800 text-white z-50'>
                 {DarkMode ? <SunMedium /> : <Moon />}
             </button>
 

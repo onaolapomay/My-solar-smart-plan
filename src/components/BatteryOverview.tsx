@@ -14,7 +14,7 @@ const BatteryOverview = ({ percentage, status, runtime }: BatteryOverviewProps) 
                     <p className="text-slate-300 text-sm">Battery Status</p>
                 </div>
 
-                <div>
+                <div >
                     <h2 className="text-6xl font-bold mt-4">{percentage}%</h2>
                     <p className="mt-4 text-green-400">{status}</p>
                 </div>

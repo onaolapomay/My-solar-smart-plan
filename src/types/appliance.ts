@@ -1,7 +1,7 @@
 interface Appliance {
     id: string;
     name: string;
-    wattage: number;
+    wattage: number | '';
     isActive: boolean;
 }
 
