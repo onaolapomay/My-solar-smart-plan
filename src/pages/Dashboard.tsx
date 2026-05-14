@@ -179,7 +179,7 @@ useEffect(() => {
                 {showAddForm && (
                     <div className='bg-slate-950 p-6 rounded-xl mt-2'>
                     <h2 className='text-2xl font-[inter] font-bold mb-4'>Add Appliance</h2>
-                    <div className='flex gap-4'>
+                    <div className='flex flex-col md:flex-row gap-4'>
                         <input type="text"
                         placeholder='Device name'
                         value={newDeviceName}

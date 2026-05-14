@@ -68,7 +68,7 @@ const usageStatus = totalUsage > 300
             <div className='bg-slate-800 p-6 rounded-2xl mt-8'>
                 <h2>Appliance Usage</h2>
 
-                <div className='h-[300px]'>
+                <div className='h-75'>
                     <ResponsiveContainer width='100%' height='100%'>
                         <BarChart data={chartData}>
                             <XAxis dataKey='name' stroke='#888' />
