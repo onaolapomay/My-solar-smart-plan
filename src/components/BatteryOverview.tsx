@@ -8,7 +8,7 @@ const BatteryOverview = ({ percentage, status, runtime }: BatteryOverviewProps) 
     const batteryColor = percentage > 80 ? 'bg-green-500' : percentage > 50 ? 'bg-yellow-600' : 'bg-red-700';
     return (
         <>
-        <div className="bg-slate-900 text-white p-12 rounded-3xl mt-8">
+        <div className="backdrop-blur-md border border-white/10 bg-slate-900/90 text-white p-12 rounded-3xl mt-8">
             <div className="flex items-center justify-between">
                 <div>
                     <p className="text-slate-300 text-sm">Battery Status</p>

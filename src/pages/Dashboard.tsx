@@ -1,5 +1,5 @@
 import Card from '../components/Card'
-import { BatteryCharging, Sun, Zap, Clock3, Fan, Monitor, Laptop, Refrigerator, Plus } from 'lucide-react'
+import { BatteryCharging, Sun, Zap, Clock3, Fan, Monitor, Laptop, Refrigerator, Plus, Trash2 } from 'lucide-react'
 import BatteryOverview from '../components/BatteryOverview'
 import appliances from '../data/appliance'
 import { useEffect, useState } from 'react'
@@ -44,6 +44,25 @@ totalUsage > 300
 : totalUsage > 200
 ? 'Moderate Usage'
 : 'Low Usage'
+
+const solarRecommendation =
+  totalUsage <= 500
+    ? {
+        inverter: '1.5KVA',
+        panels: '2 x 550W',
+        battery: '2.5kwh'
+      }
+    : totalUsage <= 1000
+      ? {
+          inverter: '3.5KVA',
+          panels: '4 x 550W',
+          battery: '4.8kwh'
+        }
+      : {
+          inverter: '5KVA',
+          panels: '8 x 550W',
+          battery: '8kwh'
+        }
 
 const activeDevices =
 deviceList.filter((appliance) => appliance.isActive).length
@@ -94,7 +113,7 @@ useEffect(() => {
             <h1 className="text-3xl font-bold">Dashboard</h1>
             <p className='text-slate-500 mt-1'>{activeDevices} active devices</p>
 
-            <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+            <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 '>
                 <Card
                 title='Battery Level'
                 value={`${batteryPercentage}%`}
@@ -122,15 +141,43 @@ useEffect(() => {
                 runtime={estimatedRuntime} />
             </div>
 
+            <div className='mt-8 bg-slate-900/90 backdrop-blur-md border border-white/10 p-6 rounded-2xl'>
+                <h2 className='text-2xl font-bold mb-6'>Solar Recommendation</h2>
+
+                <div className='grid grid-cols-1 md:grid-cols-3 gap-3'>
+                    <div>
+                        <p className='text-slate-400'>Inverter</p>
+                        <h3 className='text-2xl font-bold mt-2'>{solarRecommendation.inverter}</h3>
+                    </div>
+
+                    <div>
+                        <p className='text-slate-400'>Panels</p>
+                        <h3 className='text-2xl font-bold mt-2'>{solarRecommendation.panels}</h3>
+                    </div>
+
+                    <div>
+                        <p className='text-slate-400'>Battery</p>
+                        <h3 className='text-2xl font-bold mt-2'>{solarRecommendation.battery}</h3>
+                    </div>
+                </div>
+            </div>
+
             <div className='mt-8'>
                 <h2 className='text-2xl font-bold mb-4'>Active Appliances</h2>
 
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                    {deviceList.map((appliance) => (
-                        <div key={appliance.id}
-                        className=' bg-slate-900 text-white p-5 rounded-2xl cursor-pointer'>
-                            <div className='flex items-center justify-between'>
-                                <div className=''>
+                    {deviceList.length === 0 ? (
+                        <div className='text-center py-20 text-slate-400 col-span-2'>
+                            <h2 className='text-2xl font-bold'>No Appliances</h2>
+
+                            <p>Add a device to start monitoring</p>
+                        </div>
+                    ) : (
+                        deviceList.map((appliance) => (
+                            <div key={appliance.id}
+                            className=' backdrop-blur-md border border-white/10 bg-slate-900/90 text-white p-5 rounded-2xl cursor-pointer transition-all duration-300 hover:scale-105'>
+                                <div className='flex items-center justify-between'>
+                                    <div className=''>
                                     {appliance.name === 'fan' && <Fan size={28} />}
                                     {appliance.name === 'TV' && <Monitor size={28} />}
                                     {appliance.name === 'Fridge' && <Refrigerator size={28} />}
@@ -163,12 +210,12 @@ useEffect(() => {
                             onClick={() => deleteDevice(appliance.id)}
                             className='mt-2 bg-orange-300 hover:bg-orange-500 text-white font-mono p-3 rounded-lg cursor-pointer transition-colors duration-300'
                             >
-                                Delete
+                                <Trash2 size={20} />
                             </button>
                             </div>
 
                         </div>
-                    ))}
+                    )))}
                 </div>
             </div>
             <div className='mt-8 flex flex-col items-center'>
