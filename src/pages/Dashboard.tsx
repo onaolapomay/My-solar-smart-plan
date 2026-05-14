@@ -94,7 +94,7 @@ useEffect(() => {
             <h1 className="text-3xl font-bold">Dashboard</h1>
             <p className='text-slate-500 mt-1'>{activeDevices} active devices</p>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+            <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4'>
                 <Card
                 title='Battery Level'
                 value={`${batteryPercentage}%`}
