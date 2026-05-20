@@ -5,12 +5,22 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recha
 
 const Analytics = () => {
 
-    const [ deviceList, setDeviceList ] = useState<Appliance[]>([])
+    const [recomendDevices, setRecommendDevices] = useState<Appliance[]>([])
+    const [customizeDevices, setCustomizeDevices] = useState<Appliance[]>([])
+    const [activeMode, setActiveMode] = useState<'recommend' | 'customize'>('recommend')
+
+    const deviceList = activeMode === 'recommend' ? recomendDevices || [] : customizeDevices || []
+
 
     useEffect(() => {
-        const savedDevices = localStorage.getItem('devices')
-        if (savedDevices) {
-            setDeviceList(JSON.parse(savedDevices))
+        const savedRecommendDevices = localStorage.getItem('recommendDevices')
+        const savedCustomizeDevices = localStorage.getItem('customizeDevices')
+
+        if (savedRecommendDevices) {
+            setRecommendDevices(JSON.parse(savedRecommendDevices))
+        }
+        if (savedCustomizeDevices) {
+            setCustomizeDevices(JSON.parse(savedCustomizeDevices))
         }
     }, [])
 
@@ -22,9 +32,9 @@ const activeDevices = deviceList.filter
 
 const highestDevices = deviceList.length > 0
     ? deviceList.reduce((highest, device) => {
-        return device.wattage > highest.wattage ? device : highest
+        return Number(device.wattage) > Number(highest.wattage) ? device : highest
     })
-    : undefined
+    : null
 
 const usageStatus = totalUsage > 300
     ? 'High Usage'
@@ -43,6 +53,21 @@ const usageStatus = totalUsage > 300
     return (
         <div>
             <h1 className='text-3xl font-bold mb-6'>Analytics</h1>
+
+            <div className='flex gap-3 mb-6'>
+                <button onClick={() =>
+                    setActiveMode('recommend')
+                }
+                className={`px-4 py-2 rounded-lg ${activeMode === 'recommend' ? 'bg-green-500 text-white' : 'bg-slate-700 text-gray-300 hover:bg-slate-600'}`}>
+
+                Recommend</button>
+                <button onClick={() =>
+                    setActiveMode('customize')
+                }
+                className={`px-4 py-2 rounded-lg ${activeMode === 'customize' ? 'bg-green-500 text-white' : 'bg-slate-700 text-gray-300 hover:bg-slate-600'}`}>
+
+                Customize</button>
+            </div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
                 <div className='backdrop-blur-md border border-white/10 bg-slate-900/90 text-white p-6 rounded-2xl transition-all duration-300 hover:scale-105'>
                     <h2 className='text-xl font-semibold mb-2'>Total Usage</h2>
@@ -56,7 +81,7 @@ const usageStatus = totalUsage > 300
 
                 <div className='backdrop-blur-md border border-white/10 bg-slate-900/90 text-white p-6 rounded-2xl transition-all duration-300 hover:scale-105'>
                     <h2 className='text-xl font-semibold mb-2'>Highest Device</h2>
-                    <p className='text-2xl font-bold'>{highestDevices?.name} - {highestDevices?.wattage}W</p>
+                    <p className='text-2xl font-bold'>{highestDevices ? `${highestDevices.name} - ${highestDevices.wattage}W` : 'No Devices'}</p>
                 </div>
 
                 <div className='backdrop-blur-md border border-white/10 bg-slate-900/90 text-white p-6 rounded-2xl transition-all duration-300 hover:scale-105'>
