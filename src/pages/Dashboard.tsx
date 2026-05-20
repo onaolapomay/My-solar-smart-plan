@@ -1,6 +1,4 @@
-// import Card from '../components/Card'
 import { Fan, Monitor, Laptop, Refrigerator, Plus, Trash2, } from 'lucide-react'
-// import appliances from '../data/appliance'
 import { useEffect, useState } from 'react'
 import type { Appliance } from '../types/appliance'
 
@@ -80,11 +78,14 @@ const Dashboard = () => {
   const estimatedRuntime =
     totalUsage > 0 ? (batteryCapacity / totalUsage).toFixed(1) : '0'
 
-    const inverterCapacity =
+    const rawInverterCapacity =
     currentInverter === '1.5KVA' ? 1200
     : currentInverter === '2KVA' ? 1600
     : currentInverter === '3KVA' ? 2400
     : currentInverter === '5KVA' ? 4000 : 4800
+
+    const inverterLoss = 0.15
+    const inverterCapacity = Math.floor(rawInverterCapacity * (1 - inverterLoss))
 
     const inverterStatus =
     totalUsage <= inverterCapacity
@@ -263,7 +264,9 @@ const Dashboard = () => {
 
                   <div className='flex items-center justify-between'>
                     <p className='text-slate-400 font-[inter]'>Inverter Compatibility</p>
-                    <p className='font-bold '>{inverterStatus}</p>
+                    <p className={`font-bold ${inverterStatus === 'Compatible' ? 'text-green-500' : 'text-red-500'}`}>
+                      {inverterStatus}
+                    </p>
                   </div>
 
                   <div className='flex items-center justify-between'>
@@ -658,6 +661,93 @@ const Dashboard = () => {
         </>
       )}
 
+      {showCustomizeResult && (
+                <div className='mt-8 border-t border-white/10 pt-6'>
+
+                  <h2 className='text-2xl font-bold mb-6'>
+                    Your Selected Setup
+                  </h2>
+
+                  <div className='grid grid-cols-1 md:grid-cols-3 gap-3'>
+
+                    <div>
+                      <p className='text-slate-400'>
+                        Inverter
+                      </p>
+
+                      <h3 className='text-2xl font-bold mt-2'>
+                        {selectedInverter}
+                      </h3>
+                    </div>
+
+                    <div>
+                      <p className='text-slate-400'>
+                        Panels
+                      </p>
+
+                      <h3 className='text-2xl font-bold mt-2'>
+                        {selectedPanels}
+                      </h3>
+                    </div>
+
+                    <div>
+                      <p className='text-slate-400'>
+                        Battery
+                      </p>
+
+                      <h3 className='text-2xl font-bold mt-2'>
+                        {selectedBattery}
+                      </h3>
+                    </div>
+
+                  </div>
+
+                  <div className='mt-8 border-t border-white/10 pt-4 space-y-4'>
+
+                    <div className='flex items-center justify-between'>
+                      <p className='text-slate-400 font-[inter]'>
+                        Total Appliance Load
+                      </p>
+
+                      <p className='font-bold'>
+                        {totalUsage} W
+                      </p>
+                    </div>
+
+                    <div className='flex items-center justify-between'>
+                      <p className='text-slate-400 font-[inter]'>
+                        Inverter Compatibility
+                      </p>
+
+                      <p className={`font-bold ${inverterStatus === 'Compatible' ? 'text-green-500' : 'text-red-500'}`}>
+                      {inverterStatus}
+                      </p>
+                    </div>
+
+                    <div className='flex items-center justify-between'>
+                      <p className='text-slate-400 font-[inter]'>
+                        Estimated Battery Runtime
+                      </p>
+
+                      <p className='font-bold'>
+                        {estimatedRuntime} hours
+                      </p>
+                    </div>
+
+                    <div className='flex items-center justify-between'>
+                      <p className='text-slate-400 font-[inter]'>
+                        Estimated Full Charge Time
+                      </p>
+
+                      <p className='font-bold'>
+                        {chargingEstimate}
+                      </p>
+                    </div>
+
+                  </div>
+                </div>
+              )}
+
       {activeMode ===
         'customize' && (
         <div className='mt-8 bg-slate-900/90 backdrop-blur-md border border-white/10 p-8 rounded-2xl'>
@@ -765,92 +855,7 @@ const Dashboard = () => {
             Validate Setup
           </button>
 
-          {showCustomizeResult && (
-                <div className='mt-8 border-t border-white/10 pt-6'>
-
-                  <h2 className='text-2xl font-bold mb-6'>
-                    Your Selected Setup
-                  </h2>
-
-                  <div className='grid grid-cols-1 md:grid-cols-3 gap-3'>
-
-                    <div>
-                      <p className='text-slate-400'>
-                        Inverter
-                      </p>
-
-                      <h3 className='text-2xl font-bold mt-2'>
-                        {selectedInverter}
-                      </h3>
-                    </div>
-
-                    <div>
-                      <p className='text-slate-400'>
-                        Panels
-                      </p>
-
-                      <h3 className='text-2xl font-bold mt-2'>
-                        {selectedPanels}
-                      </h3>
-                    </div>
-
-                    <div>
-                      <p className='text-slate-400'>
-                        Battery
-                      </p>
-
-                      <h3 className='text-2xl font-bold mt-2'>
-                        {selectedBattery}
-                      </h3>
-                    </div>
-
-                  </div>
-
-                  <div className='mt-8 border-t border-white/10 pt-4 space-y-4'>
-
-                    <div className='flex items-center justify-between'>
-                      <p className='text-slate-400 font-[inter]'>
-                        Total Appliance Load
-                      </p>
-
-                      <p className='font-bold'>
-                        {totalUsage} W
-                      </p>
-                    </div>
-
-                    <div className='flex items-center justify-between'>
-                      <p className='text-slate-400 font-[inter]'>
-                        Inverter Compatibility
-                      </p>
-
-                      <p className='font-bold'>
-                        {inverterStatus}
-                      </p>
-                    </div>
-
-                    <div className='flex items-center justify-between'>
-                      <p className='text-slate-400 font-[inter]'>
-                        Estimated Battery Runtime
-                      </p>
-
-                      <p className='font-bold'>
-                        {estimatedRuntime} hours
-                      </p>
-                    </div>
-
-                    <div className='flex items-center justify-between'>
-                      <p className='text-slate-400 font-[inter]'>
-                        Estimated Full Charge Time
-                      </p>
-
-                      <p className='font-bold'>
-                        {chargingEstimate}
-                      </p>
-                    </div>
-
-                  </div>
-                </div>
-              )}
+          
         </div>
       )}
     </div>
