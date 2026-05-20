@@ -275,7 +275,7 @@ const Dashboard = () => {
                   </div>
 
                   <div className='flex items-center justify-between'>
-                    <p className='text-slate-400 font-[inter]'>Estimated Full Charge Time</p>
+                    <p className='text-slate-400 font-[inter]'>Panel Estimated Full Charge Time</p>
                     <p className='font-bold'>{chargingEstimate}</p>
                   </div>
             </div>
@@ -736,7 +736,7 @@ const Dashboard = () => {
 
                     <div className='flex items-center justify-between'>
                       <p className='text-slate-400 font-[inter]'>
-                        Estimated Full Charge Time
+                        Panel Estimated Full Charge Time
                       </p>
 
                       <p className='font-bold'>
