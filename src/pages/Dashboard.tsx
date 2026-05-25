@@ -1,6 +1,9 @@
 import { Fan, Monitor, Laptop, Refrigerator, Plus, Trash2, } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import type { Appliance } from '../types/appliance'
+import { TypeAnimation } from 'react-type-animation'
+import { motion } from 'framer-motion'
+
 
 const Dashboard = () => {
   const [recommendDevices, setRecommendDevices] = useState<Appliance[]>([])
@@ -212,10 +215,21 @@ const Dashboard = () => {
       {showRecommendation &&
         activeMode ===
           'recommend' && (
-          <div className='mt-8 bg-slate-900/90 backdrop-blur-md border border-white/10 p-6 rounded-2xl'>
-            <h2 className='text-2xl font-bold mb-6'>
-              Solar Recommendation
-            </h2>
+          <div
+           className='mt-8 bg-slate-900/90 backdrop-blur-md border border-white/10 p-6 rounded-2xl'>
+            <TypeAnimation
+                sequence={[
+                  'Analyzing appliances...',
+                  1000,
+                  'Solar Recommendation Ready ✅',
+                  1000,
+                ]}
+                cursor={false}
+                wrapper='h2'
+                speed={50}
+                className='text-2xl font-bold mb-6'
+                repeat={0}
+              />
 
             <div className='grid grid-cols-1 md:grid-cols-3 gap-3'>
               <div>
@@ -223,23 +237,38 @@ const Dashboard = () => {
                   Inverter
                 </p>
 
-                <h3 className='text-2xl font-bold mt-2'>
-                  {
-                    solarRecommendation.inverter
-                  }
-                </h3>
+                 <TypeAnimation
+                  sequence={[
+                    '',
+                    4500,
+                    `${solarRecommendation.inverter}`,
+                  ]}
+                  cursor={false}
+                  wrapper='h3'
+                  speed={50}
+                  className='text-2xl font-bold mt-2'
+                  repeat={0}
+                />
               </div>
 
               <div>
-                <p className='text-slate-400'>
+                <p 
+                className='text-slate-400'>
                   Panels
                 </p>
 
-                <h3 className='text-2xl font-bold mt-2'>
-                  {
-                    solarRecommendation.panels
-                  }
-                </h3>
+                <TypeAnimation
+                  sequence={[
+                    '',
+                    4500,
+                    `${solarRecommendation.panels}`,
+                  ]}
+                  cursor={false}
+                  wrapper='h3'
+                  speed={50}
+                  className='text-2xl font-bold mt-2'
+                  repeat={0}
+                />
               </div>
 
               <div>
@@ -247,11 +276,18 @@ const Dashboard = () => {
                   Battery
                 </p>
 
-                <h3 className='text-2xl font-bold mt-2'>
-                  {
-                    solarRecommendation.battery
-                  }
-                </h3>
+                <TypeAnimation
+                  sequence={[
+                    '',
+                    4500,
+                    `${solarRecommendation.battery}`,
+                  ]}
+                  cursor={false}
+                  wrapper='h3'
+                  speed={50}
+                  className='text-2xl font-bold mt-2'
+                  repeat={0}
+                />
               </div>
             </div>
 
@@ -259,13 +295,35 @@ const Dashboard = () => {
             <div className='mt-8 border-t border-white/10 pt-4 space-y-4'>
                   <div className='flex items-center justify-between'>
                     <p className='text-slate-400 font-[inter]'>Total Appliance Load</p>
-                    <p className='font-bold'>{totalUsage} W</p>
+                    <TypeAnimation
+                      sequence={[
+                        '',
+                        7500,
+                        `${totalUsage} W`
+                      ]}
+                      cursor={false}
+                      wrapper='p'
+                      speed={50}
+                      className='font-bold'
+                      repeat={0}
+                    />
                   </div>
 
                   <div className='flex items-center justify-between'>
                     <p className='text-slate-400 font-[inter]'>Inverter Compatibility</p>
                     <p className={`font-bold ${inverterStatus === 'Compatible' ? 'text-green-500' : 'text-red-500'}`}>
-                      {inverterStatus}
+                      <TypeAnimation
+                      sequence={[
+                        '',
+                        7500,
+                        `${inverterStatus}`
+                      ]}
+                      cursor={false}
+                      wrapper='p'
+                      speed={50}
+                      className='font-bold'
+                      repeat={0}
+                    />
                     </p>
                   </div>
 
