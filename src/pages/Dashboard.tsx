@@ -328,12 +328,34 @@ const Dashboard = () => {
 
                   <div className='flex items-center justify-between'>
                     <p className='text-slate-400 font-[inter]'>Estimated Battery Runtime</p>
-                    <p className='font-bold'>{estimatedRuntime} hours</p>
+                    <TypeAnimation
+                      sequence={[
+                        '',
+                        8500,
+                        `${estimatedRuntime}`
+                      ]}
+                      cursor={false}
+                      wrapper='p'
+                      speed={50}
+                      className='font-bold'
+                      repeat={0}
+                    />
                   </div>
 
                   <div className='flex items-center justify-between'>
                     <p className='text-slate-400 font-[inter]'>Panel Estimated Full Charge Time</p>
-                    <p className='font-bold'>{chargingEstimate}</p>
+                    <TypeAnimation
+                      sequence={[
+                        '',
+                        9500,
+                        `${chargingEstimate}`
+                      ]}
+                      cursor={false}
+                      wrapper='p'
+                      speed={50}
+                      className='font-bold'
+                      repeat={0}
+                    />
                   </div>
             </div>
             )}
