@@ -2,7 +2,6 @@ import { Fan, Monitor, Laptop, Refrigerator, Plus, Trash2, } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import type { Appliance } from '../types/appliance'
 import { TypeAnimation } from 'react-type-animation'
-import { motion } from 'framer-motion'
 
 
 const Dashboard = () => {
