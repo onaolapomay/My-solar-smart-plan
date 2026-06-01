@@ -332,7 +332,7 @@ const Dashboard = () => {
                       sequence={[
                         '',
                         8500,
-                        `${estimatedRuntime}`
+                        `${estimatedRuntime} hrs`
                       ]}
                       cursor={false}
                       wrapper='p'
@@ -743,9 +743,20 @@ const Dashboard = () => {
       {showCustomizeResult && (
                 <div className='mt-8 border-t border-white/10 pt-6'>
 
-                  <h2 className='text-2xl font-bold mb-6'>
-                    Your Selected Setup
-                  </h2>
+                  <TypeAnimation
+                    sequence={[
+                      'Validating selected setup...',
+                      500,
+                      'Checking inverter capacity...',
+                      500,
+                      'Your Selected Setup ✅',
+                    ]}
+                    wrapper='h2'
+                    speed={80}
+                    className='text-2xl font-bold mb-6'
+                    repeat={0}
+                    cursor={false}
+                  />
 
                   <div className='grid grid-cols-1 md:grid-cols-3 gap-3'>
 
@@ -754,9 +765,18 @@ const Dashboard = () => {
                         Inverter
                       </p>
 
-                      <h3 className='text-2xl font-bold mt-2'>
-                        {selectedInverter}
-                      </h3>
+                      <TypeAnimation
+                        sequence={[
+                          '',
+                          3500,
+                          `${selectedInverter}`
+                        ]}
+                        wrapper='h3'
+                        speed={50}
+                        className='text-2xl font-bold mb-6'
+                        repeat={0}
+                        cursor={false}
+                      />
                     </div>
 
                     <div>
@@ -764,9 +784,18 @@ const Dashboard = () => {
                         Panels
                       </p>
 
-                      <h3 className='text-2xl font-bold mt-2'>
-                        {selectedPanels}
-                      </h3>
+                        <TypeAnimation
+                        sequence={[
+                          '',
+                          4500,
+                          `${selectedPanels}`
+                        ]}
+                        wrapper='h3'
+                        speed={50}
+                        className='text-2xl font-bold mb-6'
+                        repeat={0}
+                        cursor={false}
+                      />
                     </div>
 
                     <div>
@@ -774,9 +803,18 @@ const Dashboard = () => {
                         Battery
                       </p>
 
-                      <h3 className='text-2xl font-bold mt-2'>
-                        {selectedBattery}
-                      </h3>
+                      <TypeAnimation
+                        sequence={[
+                          '',
+                          5500,
+                          `${selectedBattery}`
+                        ]}
+                        wrapper='h3'
+                        speed={50}
+                        className='text-2xl font-bold mb-6'
+                        repeat={0}
+                        cursor={false}
+                      />
                     </div>
 
                   </div>
@@ -788,9 +826,18 @@ const Dashboard = () => {
                         Total Appliance Load
                       </p>
 
-                      <p className='font-bold'>
-                        {totalUsage} W
-                      </p>
+                        <TypeAnimation
+                        sequence={[
+                          '',
+                          7000,
+                          `${totalUsage} W`
+                        ]}
+                        wrapper='p'
+                        speed={50}
+                        className='font-bold'
+                        repeat={0}
+                        cursor={false}
+                      />
                     </div>
 
                     <div className='flex items-center justify-between'>
@@ -799,8 +846,19 @@ const Dashboard = () => {
                       </p>
 
                       <p className={`font-bold ${inverterStatus === 'Compatible' ? 'text-green-500' : 'text-red-500'}`}>
-                      {inverterStatus}
-                      </p>
+                      <TypeAnimation
+                      sequence={[
+                        '',
+                        8000,
+                        `${inverterStatus}`
+                      ]}
+                      cursor={false}
+                      wrapper='p'
+                      speed={50}
+                      className='font-bold'
+                      repeat={0}
+                    />
+                    </p>
                     </div>
 
                     <div className='flex items-center justify-between'>
@@ -808,9 +866,18 @@ const Dashboard = () => {
                         Estimated Battery Runtime
                       </p>
 
-                      <p className='font-bold'>
-                        {estimatedRuntime} hours
-                      </p>
+                      <TypeAnimation
+                        sequence={[
+                          '',
+                          9000,
+                          `${estimatedRuntime} hours`
+                        ]}
+                        wrapper='p'
+                        speed={50}
+                        className='font-bold'
+                        repeat={0}
+                        cursor={false}
+                      />
                     </div>
 
                     <div className='flex items-center justify-between'>
@@ -818,9 +885,18 @@ const Dashboard = () => {
                         Panel Estimated Full Charge Time
                       </p>
 
-                      <p className='font-bold'>
-                        {chargingEstimate}
-                      </p>
+                      <TypeAnimation
+                        sequence={[
+                          '',
+                          10000,
+                          `${chargingEstimate} `
+                        ]}
+                        wrapper='p'
+                        speed={50}
+                        className='font-bold'
+                        repeat={0}
+                        cursor={false}
+                      />
                     </div>
 
                   </div>
