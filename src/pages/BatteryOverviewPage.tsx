@@ -1,9 +1,4 @@
-import {
-  Battery,
-  ShieldCheck,
-  Zap,
-  Lightbulb,
-} from 'lucide-react'
+import { Battery, ShieldCheck, Lightbulb, } from 'lucide-react'
 
 const BatteryOverviewPage = () => {
   return (
