@@ -1,4 +1,4 @@
-import { LayoutDashboard, Calculator, BarChart3, Settings, Menu, X  } from 'lucide-react'
+import { LayoutDashboard, Calculator, BarChart3, Settings, Menu, X, Battery  } from 'lucide-react'
 import { NavLink } from "react-router-dom"
 import { useState } from 'react'
 
@@ -27,6 +27,10 @@ const Sidebar = () => {
                 <NavLink to="/analytics" onClick={() => setIsOpen(false)} className="flex items-center font-[inter] text-xl gap-4">
                     <BarChart3 size={20} />
                     Analytics
+                </NavLink>
+                <NavLink to= "/battery-overview" onClick={() => setIsOpen(false)} className="flex items-center font-[inter] text-xl gap-4">
+                    <Battery size={30} />
+                     Battery Overview
                 </NavLink>
                 <NavLink to="/settings" onClick={() => setIsOpen(false)} className="flex items-center font-[inter] text-xl gap-4">
                     <Settings size={20} />
